@@ -128,7 +128,7 @@ namespace crow
             set_header_no_override("Access-Control-Max-Age", max_age_, res);
             if (allow_credentials_) set_header_no_override("Access-Control-Allow-Credentials", "true", res);
 
-            if (allow_credentials_ && origin_ == "*")
+            if (allow_credentials_ && origin_ == "*" && !req.get_header_value("Origin").empty())
                 set_header_no_override("Access-Control-Allow-Origin", req.get_header_value("Origin"), res);
             else
                 set_header_no_override("Access-Control-Allow-Origin", origin_, res);
